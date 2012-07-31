@@ -35,10 +35,10 @@ module Rack
 
     def metadata
       meta = {}
-      meta[:'data-status'] = @response.status if @response.respond_to? :status
-      meta[:'data-statusText'] = @response.status_message if @response.respond_to? :status_message
-      meta[:'data-type'] = @headers['Content-Type'] if @headers.has_key?('Content-Type')
-      meta.map {|key,value| "'#{key}'='#{value}'" }.join(' ')
+      meta['data-status'] = @response.status if @response.respond_to? :status
+      meta['data-statusText'] = @response.status_message if @response.respond_to? :status_message
+      meta['data-type'] = @headers['Content-Type'] if @headers.has_key?('Content-Type')
+      meta.map {|key,value| "#{key}='#{value}'" }.join(' ')
     end
   end
 end

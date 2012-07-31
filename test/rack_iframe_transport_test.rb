@@ -12,7 +12,7 @@ class RackIframeTransportTest < MiniTest::Unit::TestCase
 
   def test_with_iframe_param
     get '/', 'X-Requested-With' => 'IFrame'
-    expected_response = "<!DOCTYPE html><html><body><textarea 'data-type'='text/html'>foo</textarea></body></html>"
+    expected_response = "<!DOCTYPE html><html><body><textarea data-type='text/html'>foo</textarea></body></html>"
     assert_equal expected_response, last_response.body
   end
 
