@@ -20,7 +20,7 @@ Since you can't get headers from an iframe post, metadata are exposed as `'data-
   {"message":"Unauthorized"}
 
 > curl 'localhost:3000/api/2/account?X-Requested-With=IFrame'
-  <!DOCTYPE html><html><body><textarea 'data-status'='401' 'data-statusText'='Unauthorized' 'data-type'='text/html'>{"message":"Unauthorized"}</textarea></body></html>
+  <!DOCTYPE html><html><body><textarea data-status='401' data-statusText='Unauthorized' data-type='text/html'>{"message":"Unauthorized"}</textarea></body></html>
 ```
 
 How?
