@@ -11,8 +11,13 @@ module Rack
     def _call(env)
       @status, @headers, @response = @app.call(env)
       @request = Rack::Request.new(env)
-      @headers['Content-Type'] = 'text/html' if iframe_transport?
-      [@status, @headers, self]
+
+      if iframe_transport?
+        @headers['Content-Type'] = 'text/html'
+        [@status, @headers, self]
+      else
+        [@status, @headers, @response]
+      end
     end
 
     def each(&block)
