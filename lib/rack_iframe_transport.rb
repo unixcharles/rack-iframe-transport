@@ -45,5 +45,11 @@ module Rack
       meta['data-type'] = @headers['Content-Type'] if @headers.has_key?('Content-Type')
       meta.map {|key,value| "#{key}='#{value}'" }.join(' ')
     end
+
+    private
+
+    def method_missing(method, *args)
+      @response.send(method.intern, *args)
+    end
   end
 end
