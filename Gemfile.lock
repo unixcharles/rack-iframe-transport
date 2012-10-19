@@ -1,0 +1,18 @@
+PATH
+  remote: .
+  specs:
+    rack-iframe-transport (0.1.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    rack (1.4.1)
+    rack-test (0.6.2)
+      rack (>= 1.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  rack-iframe-transport!
+  rack-test
