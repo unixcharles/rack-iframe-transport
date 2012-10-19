@@ -11,8 +11,13 @@ module Rack
     def _call(env)
       @status, @headers, @response = @app.call(env)
       @request = Rack::Request.new(env)
-      @headers['Content-Type'] = 'text/html' if iframe_transport?
-      [@status, @headers, self]
+
+      if iframe_transport?
+        @headers['Content-Type'] = 'text/html'
+        [@status, @headers, self]
+      else
+        [@status, @headers, @response]
+      end
     end
 
     def each(&block)
@@ -39,6 +44,12 @@ module Rack
       meta['data-statusText'] = @response.status_message if @response.respond_to? :status_message
       meta['data-type'] = @headers['Content-Type'] if @headers.has_key?('Content-Type')
       meta.map {|key,value| "#{key}='#{value}'" }.join(' ')
+    end
+
+    private
+
+    def method_missing(method, *args)
+      @response.send(method.intern, *args)
     end
   end
 end
