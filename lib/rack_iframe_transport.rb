@@ -32,11 +32,11 @@ module Rack
     end
 
     def html_document_left
-      "<!DOCTYPE html><html><body><#{tag} #{metadata}>"
+      "<!DOCTYPE html><html><body><#{@tag} #{metadata}>"
     end
 
     def html_document_right
-      "</#{tag}></body></html>"
+      "</#{@tag}></body></html>"
     end
 
     def metadata
