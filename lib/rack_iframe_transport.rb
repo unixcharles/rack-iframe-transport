@@ -1,7 +1,8 @@
 module Rack
   class IframeTransport
-    def initialize(app)
+    def initialize(app, tag = 'textarea')
       @app = app
+      @tag = tag
     end
 
     def call(env)
@@ -31,11 +32,11 @@ module Rack
     end
 
     def html_document_left
-      "<!DOCTYPE html><html><body><textarea #{metadata}>"
+      "<!DOCTYPE html><html><body><#{tag} #{metadata}>"
     end
 
     def html_document_right
-      "</textarea></body></html>"
+      "</#{tag}></body></html>"
     end
 
     def metadata
