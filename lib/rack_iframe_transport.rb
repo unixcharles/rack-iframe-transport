@@ -1,8 +1,9 @@
 module Rack
   class IframeTransport
-    def initialize(app, tag = 'textarea')
-      @app = app
-      @tag = tag
+    def initialize(app, tag = 'textarea', meta = {})
+      @app  = app
+      @tag  = tag
+      @meta = meta
     end
 
     def call(env)
@@ -40,7 +41,7 @@ module Rack
     end
 
     def metadata
-      meta = {}
+      meta = @meta.dup
       meta['data-status'] = @response.status if @response.respond_to? :status
       meta['data-statusText'] = @response.status_message if @response.respond_to? :status_message
       meta['data-type'] = @headers['Content-Type'] if @headers.has_key?('Content-Type')
