@@ -16,6 +16,12 @@ class RackIframeTransportTest < MiniTest::Unit::TestCase
     assert_equal expected_response, last_response.body
   end
 
+  def test_with_iframe_param_and_json_content
+    get '/json', 'X-Requested-With' => 'IFrame'
+    expected_response = "<!DOCTYPE html><html><body><textarea data-type='application/json'>{\"foo\":\"bar\"}</textarea></body></html>"
+    assert_equal expected_response, last_response.body
+  end
+
   def test_without_iframe_param
     get '/'
     assert_equal "foo", last_response.body
