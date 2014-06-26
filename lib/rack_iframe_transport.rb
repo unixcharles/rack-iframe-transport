@@ -15,6 +15,7 @@ module Rack
       @request = Rack::Request.new(env)
 
       if iframe_transport?
+        @enclosed_content_type = @headers['Content-Type'] || 'text/html'
         @headers['Content-Type'] = 'text/html'
         [@status, @headers, self]
       else
@@ -44,7 +45,7 @@ module Rack
       meta = @meta.dup
       meta['data-status'] = @response.status if @response.respond_to? :status
       meta['data-statusText'] = @response.status_message if @response.respond_to? :status_message
-      meta['data-type'] = @headers['Content-Type'] if @headers.has_key?('Content-Type')
+      meta['data-type'] = @enclosed_content_type
       meta.map {|key,value| "#{key}='#{value}'" }.join(' ')
     end
 

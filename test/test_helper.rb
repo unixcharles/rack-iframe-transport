@@ -9,7 +9,11 @@ module Rack
     end
 
     def call(env)
-      [200, {}, ["foo"]]
+      if env["PATH_INFO"] == "/json"
+        [200, {'Content-Type' => 'application/json'}, ['{"foo":"bar"}']]
+      else
+        [200, {}, ["foo"]]
+      end
     end
   end
 end
